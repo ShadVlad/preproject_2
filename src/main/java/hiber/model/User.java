@@ -6,8 +6,13 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 
+//   @OneToOne(cascade = CascadeType.ALL)
+//   @PrimaryKeyJoinColumn
+//   private Car car;
+
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id")
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
 
    @Column(name = "name")
@@ -23,16 +28,21 @@ public class User {
 //   private Car car ;
 
 
-   @OneToOne
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "car_id")
    private Car car;
 
+
    public User() {}
-   
-   public User(String firstName, String lastName, String email, Car car) {
+
+   public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
+    }
+   
+   public User(String firstName, String lastName, String email, Car car) {
+      this(firstName, lastName, email);
       this.car = car;
    }
 

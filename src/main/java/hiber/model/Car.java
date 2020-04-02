@@ -5,8 +5,10 @@ import javax.persistence.*;
 @Entity(name = "car")
 @Table(name = "car")
 public class Car {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name")
@@ -14,10 +16,16 @@ public class Car {
 
     @Column(name = "series")
     private String series;
+//
+//    @OneToOne(mappedBy = "car")
+//    private User user;
 
-    @OneToOne(mappedBy = "car")
-    private User user;
+    public Car() {}
 
+    public Car(String name, String series) {
+        this.name = name;
+        this.series = series;
+    }
 
     public Long getId() {
         return id;
@@ -43,11 +51,9 @@ public class Car {
         this.series = series;
     }
 
-    public User getUser() {
-        return user;
+    @Override
+    public String toString() {
+        return "name = " + name + ", series = " + series;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
