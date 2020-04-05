@@ -27,15 +27,15 @@ public class UserDaoImp implements UserDao {
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from user ");
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("FROM user ");
       return query.getResultList();
       //return null;
    }
    @Override
    public User getUserForCar(String name, String series) {
-      User user = null;
+      User user;
 
-      user = (User) sessionFactory.getCurrentSession().createQuery("from user where car.name=:nameParam and car.series=:seriesParam")
+      user = (User) sessionFactory.getCurrentSession().createQuery("FROM user WHERE car.name=:nameParam AND car.series=:seriesParam")
       .setParameter("nameParam", name)
       .setParameter("seriesParam", series).uniqueResult();      //Integer.valueOf(series))
       return user;
